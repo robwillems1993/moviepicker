@@ -12,16 +12,12 @@ function getRandomNumber(number) {
   return scaledNumber;
 }
 
-
-
 function RandomMovie({ onAddWatched, onDeleteWatched }) {
   const [movie, setMovie] = useState("");
   const [selectedMovie, setselectedMovie] = useState(null);
   const [id, setId] = useState(null);
 
-  function handleClick(id) {
-    setId(id);
-  }
+
 
   // Vraagt de films op van de endpoint en converteert het van een binnenkomend object naar een bruikbare array.
   // Vervolgens wordt er een random getal gegenereert. Dit getal is het indexnummer van de positie in de array van de willekeurige film die de app laat zien.
@@ -40,7 +36,12 @@ function RandomMovie({ onAddWatched, onDeleteWatched }) {
     setMovie("");
     setselectedMovie("")
   };
-
+  
+  // Als er een klein kaartje wordt aangeklikt, pak dan het ID van die film
+  function handleClick(id) {
+    setId(id);
+  }
+  // Vraag alle gegevens op van de film met het aangeklikte ID.
   useEffect(() => {
     async function fetchMovieData(id) {
       if (!id) return;

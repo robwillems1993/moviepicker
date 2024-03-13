@@ -12,10 +12,11 @@ import { useLocalStorageState } from "./customHooks/useLocalStorageState";
 function App() {
   const [fav, setFav] = useLocalStorageState([], "fav");
 
+  // gebruik de customhook om een film aan de favorieten toe te voegen
   function handleAddWatched(movie) {
     setFav((fav) => [...fav, movie]);
   }
-
+  // gebruik de customhook om een film van de favorieten te verwijderen
   function handleDeleteWatched(id) {
     setFav((fav) => fav.filter((movie) => movie.id !== id));
   }

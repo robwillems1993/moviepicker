@@ -12,10 +12,8 @@ function FilterMovies({ onAddWatched, onDeleteWatched }) {
   const [movie, setMovie] = useState(null);
   const [id, setId] = useState(null);
 
-  function handleClick(id) {
-    setId(id);
-  }
 
+  // Vraag films op met de filters die de gebruiker heeft aangegeven. metric is lager/hoger en votes is het aantal stemmen.
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -28,9 +26,16 @@ function FilterMovies({ onAddWatched, onDeleteWatched }) {
     fetchData();
   }, [votes, metric]);
 
+  // Als er een klein kaartje wordt aangeklikt, pak dan het ID van die film
+  function handleClick(id) {
+    setId(id);
+  }
+  // Vraag alle gegevens op van de film met het aangeklikte ID.
   useEffect(() => {
     async function fetchMovieData(id) {
+      // als er geen ID beschikbaar is, sla de rest dan over.
       if (!id) return;
+      // als dat wel het geval is, zoek dan de film op.
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}`,
         options

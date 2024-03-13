@@ -10,10 +10,11 @@ function FavouriteMovies({ fav, onAddWatched, onDeleteWatched }) {
   const [movie, setMovie] = useState(null);
   const [id, setId] = useState(null);
 
+  // Als er een klein kaartje wordt aangeklikt, pak dan het ID van die film
   function handleClick(id) {
     setId(id);
   }
-
+  // Vraag alle gegevens op van de film met het aangeklikte ID.
   useEffect(() => {
     async function fetchMovieData(id) {
       if (!id) return;

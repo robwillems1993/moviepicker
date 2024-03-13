@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 import axios from "axios";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -14,6 +16,7 @@ function SignUp() {
         email,
         password,
       });
+      login(response.data.accessToken);
     } catch (error) {
       console.error(error);
     }

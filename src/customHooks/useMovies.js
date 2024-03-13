@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { options } from "../config/apiOptions";
 import axios from "axios";
 
+
+// custom hook functie waarmee er binnen de applicatie op verschillende locaties gezocht kan worden naar films.
+// geeft resultaten terug afhankelijk van waaraf gezocht wordt.
 function useMovies(query, searchType) {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);

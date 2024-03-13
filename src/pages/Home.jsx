@@ -13,10 +13,8 @@ function Home({ onAddWatched, onDeleteWatched }) {
   const [movie, setMovie] = useState(null);
   const [id, setId] = useState(null);
 
-  function handleClick(id) {
-    setId(id);
-  }
-
+  
+  // Haal direct films om op de gebruiker te laten zien
   useEffect(() => {
     const urlFetch =
       "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc?api_key=23a150bffcd79b25a828e7e8c76290dc";
@@ -33,6 +31,11 @@ function Home({ onAddWatched, onDeleteWatched }) {
     fetchData();
   }, []);
 
+  // Als er een klein kaartje wordt aangeklikt, pak dan het ID van die film
+  function handleClick(id) {
+    setId(id);
+  }
+  // Vraag alle gegevens op van de film met het aangeklikte ID.
   useEffect(() => {
     async function fetchMovieData(id) {
       if (!id) return;
@@ -44,6 +47,7 @@ function Home({ onAddWatched, onDeleteWatched }) {
     }
     fetchMovieData(id);
   }, [id]);
+
   return (
     <>
       <div className="header">

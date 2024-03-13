@@ -12,9 +12,8 @@ function CategoriesSearch({ onAddWatched, onDeleteWatched }) {
   const [movie, setMovie] = useState(null);
   const [id, setId] = useState(null);
 
-  function handleClick(id) {
-    setId(id);
-  }
+
+  // haal alle categorieen op.
   useEffect(() => {
     const getCategories = async () => {
       const response = await fetch(
@@ -26,8 +25,14 @@ function CategoriesSearch({ onAddWatched, onDeleteWatched }) {
     };
     getCategories();
   }, []);
+  // Gebruik de customhook, geef het genre (categorie) mee en geef aan dat de meegestuurde variable een categorie betreft.
   const [movies] = useMovies(genre, "categories");
 
+  // Als er een klein kaartje wordt aangeklikt, pak dan het ID van die film
+  function handleClick(id) {
+    setId(id);
+  }
+  // Vraag alle gegevens op van de film met het aangeklikte ID.
   useEffect(() => {
     async function fetchMovieData(id) {
       if (!id) return;
@@ -47,9 +52,10 @@ function CategoriesSearch({ onAddWatched, onDeleteWatched }) {
       </div>
       <div className="second-menu-container">
         <p className="second-menu-text">Choose a Genre:</p>
-        <select
+        <select 
           className="selector"
           value={genre}
+          // Als er een categorie wordt aangeklikt, 'set' deze dan als genre in de state.
           onChange={(event) => {
             setGenre(event.target.value);
           }}
