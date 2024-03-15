@@ -16,8 +16,15 @@ function FilterMovies({ onAddWatched, onDeleteWatched }) {
   // Vraag films op met de filters die de gebruiker heeft aangegeven. metric is lager/hoger en votes is het aantal stemmen.
   useEffect(() => {
     async function fetchData() {
+      let ascDesc;
+      if (metric === "gte") {
+        ascDesc = "asc";
+      }
+      if (metric === "lte") {
+        ascDesc = "desc"
+      }
       const response = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&vote_count.${metric}=${votes}`,
+        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.${ascDesc}&vote_count.${metric}=${votes}`,
         options
       );
       const data = response.data.results;
